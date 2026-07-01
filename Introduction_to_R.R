@@ -45,5 +45,42 @@ Students$Grades[2] # Data frame $ Variable [index]
 # Average score of Students 
 mean(Students$Scores)
 
+# Lecture 2 
+# Installing tidyverse 
+install.packages("tidyverse")
+library(tidyverse)
+
+# Using tibbles 
+Students <- tibble(Students)
+
+# Pre-processing data 
+data("iris")
+Data <- iris
+
+head(Data) # shows the first few rows of the data 
+tail(Data) # shows the last few rows of the data 
+glimpse(Data)
+
+
+# Exporting data 
+library(readr)
+write.csv(Data, "Iris.csv", row.names = FALSE)
+
+# Importing data 
+HRdata <- read.csv("/home/muturi/Desktop/USIU/DSA_1060/DSA_Revision/HRDataSet.csv")
+
+# Some descriptive analytics 
+hist(iris$Petal.Length) # R based function
+
+
+# Using ggplot 
+library(ggplot2) # Calling it 
+ggplot2::ggplot(Data, aes(x=Petal.Length)) + 
+  geom_histogram(binwidth = 0.5)
+
+
+
+
+
 
 
