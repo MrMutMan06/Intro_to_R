@@ -73,11 +73,30 @@ HRdata <- read.csv("/home/muturi/Desktop/USIU/DSA_1060/DSA_Revision/HRDataSet.cs
 hist(iris$Petal.Length) # R based function
 
 
-# Using ggplot 
+# Using ggplot - this is for you to finish up 
 library(ggplot2) # Calling it 
-ggplot2::ggplot(Data, aes(x=Petal.Length)) + 
-  geom_histogram(binwidth = 0.5)
 
+ggplot2::ggplot(Data, mapping = aes(x=Petal.Length)) + 
+  geom_histogram(binwidth = 0.5) + 
+  labs(title = 'Iris Data') +
+  labs(
+    x = "Petal length",
+    y = "Count"
+  )
+
+# Creating a scatter plot 
+Penguins_data <- penguins
+head(Penguins_data)
+
+ggplot2::ggplot(Penguins_data, mapping = aes(x = bill_dep, y = bill_len)) +
+  geom_point(size = 2, colour = "blue") +
+  labs(
+    title = "Scatter plot of length vs depth",
+    x = "Depth",
+    y = "Length"
+  ) + 
+  theme_classic()
+  
 
 
 
