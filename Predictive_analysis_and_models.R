@@ -31,5 +31,5 @@ summary(linear_model) # viewing the summary: we interpret the coefficient, the p
 ## On average these cars cover 37.2851 miles per gallon 
 ## For every increase in a unit of weight, the miles per gallon reduce by 5.3445 
 ## The two variables are statistically significant - very low p-value (3 stars)
-## The R-squared value is a way to check whether this model is a best fit 
+## The R-squared value is a way to check whether this model is a best fit (for this class 75 and above is good)
 
