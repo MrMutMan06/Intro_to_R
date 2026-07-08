@@ -1,0 +1,87 @@
+---
+title: "Group8_assignment_2"
+output:
+  pdf_document: default
+  html_document: default
+date: "2026-07-08"
+---
+
+# (a)
+
+```{R}
+# Group 8 assignment 
+# Calling my packages
+library(tidyverse)
+library(ggplot2)
+
+# Working with the mtcars data set 
+## Loading the data set 
+Mtcars <- mtcars
+
+## Displaying the first six observations 
+head(Mtcars)
+```
+
+- A brief description of the structure of the mtcars data set:
+  - It has the name of the car model in the first column, followed by the mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, and carb. They are all of the dbl data type. 
+  
+# (b) 
+## (i)
+```{R}
+
+
+# Performing descriptive analytics on the variable mpg 
+mean(Mtcars$mpg) # mean 
+sd(Mtcars$mpg) # standard deviation 
+```
+
+- Mean = 20.09062
+- Standard deviation =  6.026948
+
+## (ii)
+```{R}
+## Histogram for mpg 
+ggplot2::ggplot(data = Mtcars, mapping = aes(x = mpg)) + 
+  geom_histogram(binwidth = 1.5)
+```
+
+- Most of the data is clustered between approximately 12.5 and 27.5 miles per gallon 
+
+# (c)
+```{R}
+# Creating a scatter plot of mpg vs hp
+ggplot2::ggplot(data = Mtcars, mapping = aes(x = hp, y = mpg)) + 
+  geom_point(size = 2) +
+  labs (
+    x = "horsepower",
+    y = "miles per gallon"
+  )
+
+```
+
+- There is a linear relationship 
+
+# (d)
+```{R}
+# Creating a simple linear regression model with mpg as the response variable and hp as the predictor variable 
+linear_model <- lm(mpg ~ hp, data = Mtcars)
+summary(linear_model) # viewing the results of the linear model
+```
+
+## (i)
+- y = 30.09886 - 0.06823x
+
+## (ii)
+- The coefficient implies that for every addition unit of horsepower, the miles per gallon reduce by 0.06823
+
+## (iii)
+- The coefficient of determination = 0.6024 
+    - or (60.24%)
+
+# (e)
+```{R}
+# Predicting the fuel efficiency for a car with hp = 150 
+predict(linear_model, data.frame(hp = c(150)))
+```
+
+- For a car with hp = 150 the linear model predicts an mpg of 19.86462
