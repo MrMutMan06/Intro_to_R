@@ -1,0 +1,123 @@
+---
+title: "Week 10 Revision exercise"
+output: html_document
+date: "2026-07-15"
+---
+
+# (a)
+
+```{R}
+# Calling my packages 
+library("tidyverse")
+library("ggplot2")
+
+# install.packages("palmerpenguins") - I already have this installed 
+
+# Working with the penguins data set 
+Penguins <- penguins
+
+## Displaying the first six observations 
+head(Penguins) 
+
+
+```
+
+
+- A brief description of the structure of the penguins data set: 
+  - It has the species name as the first column followed by the island, bill length, bill depth, flipper length, body mass, sex, and year. 
+  - The data types of the columns in the order listed above are as follows: factor, factor, numeric, numeric, integer, integer, factor, integer. 
+  
+# (b)
+## (i)
+  
+```{R}
+# Performing descriptive analytics (excluding missing values)
+mean(Penguins$body_mass, na.rm = TRUE) # mean 
+
+sd(Penguins$body_mass, na.rm = TRUE) # standard deviation 
+
+```
+  
+## (ii)
+
+```{R}
+# Producing a histogram 
+hist(
+  Penguins$body_mass,
+  main = "Histogram of the body mass of penguins in Palmer",
+  xlab = "Body mass"
+  )
+  
+```
+
+- Most of the data is concentrated between 3,000 and 4,000
+
+# (c)
+
+```{R}
+# Creating a scatter plot 
+ggplot2::ggplot(Penguins, mapping = aes(x = body_mass, y = flipper_len)) + 
+  geom_point(size = 2) + 
+  labs(
+    x = "Body mass",
+    y = "Flipper length"
+    )
+
+```
+
+- There is a strong linear relationship between body mass and flipper length 
+
+# (d)
+
+```{R}
+# Computing the correlation between body mass and flipper length (excluding the missing observations) 
+cor(Penguins$body_mass, Penguins$flipper_len, use = "pairwise.complete.obs") # pairwise deletion to maximise data usage
+
+```
+
+- A correlation of 0.8712018 shows a very strong positive correlation between body mass and flipper length 
+
+# (e)
+
+```{R}
+# Fitting a simple linear regression model with body mass as the response variable and flipper length as the predictor variable 
+
+bm_fl_model <- lm(body_mass ~ flipper_len, data = Penguins)
+
+summary(bm_fl_model) # Viewing the results of the linear model 
+
+```
+
+## (i)
+$$ \hat{y} = -5780.831 + 49.686x $$
+
+## (ii)
+- The coefficient implies that for every addition unit of flipper length, body mass increases by 49.686
+
+## (iii)
+- The coefficient of determination = 0.759 
+  - or (75.9%) 
+  
+# (f)
+
+```{R}
+# Fitting a multiple linear regression with body mass as the response variable, while flipper length and bill length are the predictor variables   
+
+penguins_model <- lm(body_mass ~ flipper_len + bill_len, data = Penguins)
+summary(penguins_model) # Viewing the results of the linear model 
+
+```
+
+## (i)
+$$ \hat{y} = -5736.897 + 48.145x_1 + 6.047x_2 $$
+
+## (ii)
+- The R-squared value of the model in part (e) is nearly identical to that of the model in part (f) 
+  - part (e)'s R-squared = 0.759, which could be rounded to 0.76 resulting in the same R-squared as part (f)
+
+## (iii)
+- I don't think the multiple linear regression model improves prediction given that the adjusted R-squared barely changed between the two models. 
+
+
+
+
